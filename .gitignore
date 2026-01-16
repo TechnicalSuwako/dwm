@@ -1,0 +1,8 @@
+*.o
+dwm
+*.core
+*.orig
+*.rej
+*.core
+*.diff
+config.h
