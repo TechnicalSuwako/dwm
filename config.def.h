@@ -13,11 +13,19 @@ static const int user_bh            = 2;        /* 2 is the default spacing arou
 static const int monoclemode        = 4;
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=8";
+#if defined(__OpenBSD__)
+static const char col_gray1[]       = "#232320";
+static const char col_gray2[]       = "#ecea71";
+static const char col_gray3[]       = "#b8b515"; // red on black
+static const char col_gray4[]       = "#fcfcfc"; // black on red
+static const char col_cyan[]        = "#b8b515";
+#elif defined(__FreeBSD__)
 static const char col_gray1[]       = "#232020";
 static const char col_gray2[]       = "#f35869";
 static const char col_gray3[]       = "#b61729"; // red on black
 static const char col_gray4[]       = "#fcfcfc"; // black on red
 static const char col_cyan[]        = "#b61729";
+#endif
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
