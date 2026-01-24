@@ -35,10 +35,10 @@ FREETYPEINC = ${INC}/freetype2
 # includes and libs
 .if "${UNAME}" == "OpenBSD"
 INCS = -I${X11INC} -I${FREETYPEINC}
-LIBS = -L${X11LIB} \
+LIBS = -L${X11LIB} -L${PREFIX}/lib \
 			 -static \
 			 -lX11 -lXinerama -lfontconfig -lXft -lXrender -lc -lxcb \
-			 -lpthread -lXext -lfreetype -lexpat -lz -lXau -lXdmcp
+			 -lpthread -lXext -lfreetype -lexpat -lpng16 -lz -lm -lXau -lXdmcp
 .elif "${UNAME}" == "FreeBSD"
 INCS = -I${INC} -I${FREETYPEINC}
 LIBS = -L${LIB} \
