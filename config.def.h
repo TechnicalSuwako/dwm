@@ -13,19 +13,11 @@ static const int user_bh            = 2;        /* 2 is the default spacing arou
 static const int monoclemode        = 4;
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=8";
-#if defined(__OpenBSD__)
-static const char col_gray1[]       = "#232320";
-static const char col_gray2[]       = "#ecea71";
-static const char col_gray3[]       = "#b8b515"; // red on black
-static const char col_gray4[]       = "#fcfcfc"; // black on red
-static const char col_cyan[]        = "#b8b515";
-#elif defined(__FreeBSD__)
 static const char col_gray1[]       = "#232020";
 static const char col_gray2[]       = "#f35869";
 static const char col_gray3[]       = "#b61729"; // red on black
 static const char col_gray4[]       = "#fcfcfc"; // black on red
 static const char col_cyan[]        = "#b61729";
-#endif
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
@@ -81,6 +73,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "um", NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *slockcmd[]  = { "slock", NULL };
 static const char *browsercmd[] = {"ungoogled-chromium", NULL};
 static const char *fcitxcmd[] = {"fcitx5", NULL};
 
@@ -89,6 +82,7 @@ Autostarttag autostarttaglist[] = {
 	{.cmd = NULL, .tags = 0 },
 };
 
+#include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Tab,    view,           {0} },
@@ -106,7 +100,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 
